@@ -21,11 +21,14 @@ type Transition = { mode: TimerMode; time: number; counters?: TimesAuto }
 function nextTransition(
   activeItem: TimerMode,
   counters: TimesAuto,
-  defaultTime: DefaultTime,
+  defaultTime: DefaultTime
 ): Transition {
   if (activeItem.pomodoro) {
     if (counters.pomoTimes === POMODORO_CYCLE_COUNT) {
-      return { mode: { ...INIT_ACTIVE_FOCUS, long: true }, time: defaultTime.longTime * SECONDS_PER_MINUTE }
+      return {
+        mode: { ...INIT_ACTIVE_FOCUS, long: true },
+        time: defaultTime.longTime * SECONDS_PER_MINUTE,
+      }
     }
     return {
       mode: { ...INIT_ACTIVE_FOCUS, break: true },

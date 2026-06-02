@@ -1,6 +1,13 @@
 import { useContext, useLayoutEffect, useState } from 'react'
 import ReactSlider from 'react-slider'
-import { chillIcon, jazzyIcon, searchIcon, sleepyIcon, volumeMaxIcon, volumeMinIcon } from '../../assets/icons'
+import {
+  chillIcon,
+  jazzyIcon,
+  searchIcon,
+  sleepyIcon,
+  volumeMaxIcon,
+  volumeMinIcon,
+} from '../../assets/icons'
 import { CHILL_LINKS, JAZZY_LINKS, NOISE_ICONS, SLEEPY_LINKS } from '../../constants'
 import {
   INITIAL_VOLUME_PERCENT,
@@ -15,8 +22,15 @@ import MoodItem from './MoodItem'
 type MoodType = 'sleepy' | 'jazzy' | 'chill' | 'youtube'
 
 const Mood = () => {
-  const { setCurrentMood, setCurrentAudio, setPlaying, moodTab, setMoodTab, controlRef, noisesRefs } =
-    useContext(ThemeContext)
+  const {
+    setCurrentMood,
+    setCurrentAudio,
+    setPlaying,
+    moodTab,
+    setMoodTab,
+    controlRef,
+    noisesRefs,
+  } = useContext(ThemeContext)
 
   const [volume, setVolume] = useState(INITIAL_VOLUME_PERCENT)
   const initialTab = { sleepy: false, jazzy: false, chill: false, youtube: false }
@@ -151,7 +165,11 @@ const Mood = () => {
                 />
               )}
               renderThumb={({ key, ...props }) => (
-                <div key={key} {...props} className="h-6 w-6 rounded-full cursor-pointer outline-none">
+                <div
+                  key={key}
+                  {...props}
+                  className="h-6 w-6 rounded-full cursor-pointer outline-none"
+                >
                   <img src={noise.icon} alt="icon" />
                 </div>
               )}

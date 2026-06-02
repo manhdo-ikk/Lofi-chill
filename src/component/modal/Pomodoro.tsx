@@ -92,9 +92,24 @@ const Pomodoro = () => {
             </div>
           </div>
           <div className="flex w-full rounded-full bg-bg-200 p-2 mb-8">
-            <Button text={POMODORO_LABEL} active={activeItem.pomodoro} big handle={() => handleActive('pomodoro')} />
-            <Button text={SHORT_BREAK_LABEL} active={activeItem.break} big handle={() => handleActive('break')} />
-            <Button text={LONG_BREAK_LABEL} active={activeItem.long} big handle={() => handleActive('long')} />
+            <Button
+              text={POMODORO_LABEL}
+              active={activeItem.pomodoro}
+              big
+              handle={() => handleActive('pomodoro')}
+            />
+            <Button
+              text={SHORT_BREAK_LABEL}
+              active={activeItem.break}
+              big
+              handle={() => handleActive('break')}
+            />
+            <Button
+              text={LONG_BREAK_LABEL}
+              active={activeItem.long}
+              big
+              handle={() => handleActive('long')}
+            />
           </div>
 
           <div className="flex flex-col justify-center w-full rounded-lg bg-bg-200 p-2 mb-4">
@@ -127,7 +142,11 @@ const Pomodoro = () => {
               handle={() => {
                 setActiveItem({ ...initActiveFocus, pomodoro: true })
                 setIsRunning(false)
-                setDefaultTime({ pomoTime: DEFAULT_POMODORO_MINUTES, breakTime: DEFAULT_BREAK_MINUTES, longTime: DEFAULT_LONG_MINUTES })
+                setDefaultTime({
+                  pomoTime: DEFAULT_POMODORO_MINUTES,
+                  breakTime: DEFAULT_BREAK_MINUTES,
+                  longTime: DEFAULT_LONG_MINUTES,
+                })
                 setInitTimesAuto({ pomoTimes: 0, breakTimes: 0, longTimes: 0 })
                 setAutoRun(false)
                 setReset(true)
