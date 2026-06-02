@@ -33,5 +33,13 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Deploy to S3
-        run: aws s3 sync dist/ s3://${{ secrets.AWS_S3_BUCKET }} --delete
+      - name: Deploy to S3 (release theo commit)
+        run: aws s3 sync dist/ s3://${{ secrets.AWS_S3_BUCKET }}/releases/${{ github.sha }}/ --delete
+
+      - name: Trigger Amplify deployment
+        run: |
+          aws amplify start-deployment \
+            --app-id ${{ secrets.AMPLIFY_APP_ID }} \
+            --branch-name main \
+            --source-url s3://${{ secrets.AWS_S3_BUCKET }}/releases/${{ github.sha }}/ \
+            --source-url-type BUCKET_PREFIX
