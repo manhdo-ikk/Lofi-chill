@@ -1,29 +1,17 @@
-import jazzy1 from './jazzy-1.mp3'
-import jazzy2 from './jazzy-2.mp3'
-import jazzy3 from './jazzy-3.mp3'
-import jazzy4 from './jazzy-4.mp3'
-import jazzy5 from './jazzy-5.mp3'
-import jazzy6 from './jazzy-6.mp3'
-import jazzy8 from './jazzy-8.mp3'
-import jazzy10 from './jazzy-10.mp3'
-import jazzy11 from './jazzy-11.mp3'
-import jazzy12 from './jazzy-12.mp3'
-import jazzy13 from './jazzy-13.mp3'
-import jazzy14 from './jazzy-14.mp3'
-import jazzy15 from './jazzy-15.mp3'
+import { CDN_BASE } from '../../constants/cdn'
 
-export {
-  jazzy1,
-  jazzy2,
-  jazzy3,
-  jazzy4,
-  jazzy5,
-  jazzy6,
-  jazzy8,
-  jazzy10,
-  jazzy11,
-  jazzy12,
-  jazzy13,
-  jazzy14,
-  jazzy15,
-}
+const BASE = `${CDN_BASE}/jazzy`
+
+export const jazzy1  = `${BASE}/jazzy-1.mp3`
+export const jazzy2  = `${BASE}/jazzy-2.mp3`
+export const jazzy3  = `${BASE}/jazzy-3.mp3`
+export const jazzy4  = `${BASE}/jazzy-4.mp3`
+export const jazzy5  = `${BASE}/jazzy-5.mp3`
+export const jazzy6  = `${BASE}/jazzy-6.mp3`
+export const jazzy8  = `${BASE}/jazzy-8.mp3`
+export const jazzy10 = `${BASE}/jazzy-10.mp3`
+export const jazzy11 = `${BASE}/jazzy-11.mp3`
+export const jazzy12 = `${BASE}/jazzy-12.mp3`
+export const jazzy13 = `${BASE}/jazzy-13.mp3`
+export const jazzy14 = `${BASE}/jazzy-14.mp3`
+export const jazzy15 = `${BASE}/jazzy-15.mp3`

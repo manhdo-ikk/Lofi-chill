@@ -1,35 +1,20 @@
-import cityTraffic from './city_traffic.mp3'
-import rainCity from './rain_city.mp3'
-import fireplace from './fireplace.mp3'
-import campfire from './campfire.mp3'
-import forestNight from './forest_night.mp3'
-import rainForest from './rain_forest.mp3'
-import waves from './waves.mp3'
-import fan from './fan.mp3'
-import storm from './storm.mp3'
-import river from './river.mp3'
-import birds from './birds.mp3'
-import peopleTalk from './people_talk.mp3'
-import wind from './wind.mp3'
-import ocean from './ocean.mp3'
-import snow from './snow.mp3'
-import keyboard from './keyboard.mp3'
+import { CDN_BASE } from '../../constants/cdn'
 
-export {
-  cityTraffic,
-  rainCity,
-  fireplace,
-  campfire,
-  forestNight,
-  rainForest,
-  waves,
-  fan,
-  storm,
-  river,
-  birds,
-  peopleTalk,
-  wind,
-  ocean,
-  snow,
-  keyboard,
-}
+const BASE = `${CDN_BASE}/noises`
+
+export const cityTraffic = `${BASE}/city_traffic.mp3`
+export const rainCity    = `${BASE}/rain_city.mp3`
+export const fireplace   = `${BASE}/fireplace.mp3`
+export const campfire    = `${BASE}/campfire.mp3`
+export const forestNight = `${BASE}/forest_night.mp3`
+export const rainForest  = `${BASE}/rain_forest.mp3`
+export const waves       = `${BASE}/waves.mp3`
+export const fan         = `${BASE}/fan.mp3`
+export const storm       = `${BASE}/storm.mp3`
+export const river       = `${BASE}/river.mp3`
+export const birds       = `${BASE}/birds.mp3`
+export const peopleTalk  = `${BASE}/people_talk.mp3`
+export const wind        = `${BASE}/wind.mp3`
+export const ocean       = `${BASE}/ocean.mp3`
+export const snow        = `${BASE}/snow.mp3`
+export const keyboard    = `${BASE}/keyboard.mp3`

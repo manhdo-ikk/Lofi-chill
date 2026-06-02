@@ -1,105 +1,59 @@
-import cafe1Img from './cafe-1.jpg'
-import chill1Img from './chill-1.jpg'
-import chill2Img from './chill-2.jpg'
-import chill3Img from './chill-3.jpg'
-import chill4Img from './chill-4.jpg'
-import chill5Img from './chill-5.jpg'
-import chill6Img from './chill-6.jpg'
-import chill7Img from './chill-7.jpg'
-import foodStall1Img from './food-stall-1.jpg'
-import foodStall2Img from './food-stall-2.jpg'
-import foodStall3Img from './food-stall-3.jpg'
-import forestHouse1Img from './forest-house-1.jpg'
-import homeRoom1Img from './home-room-1.jpg'
-import homeRoom2Img from './home-room-2.jpg'
-import homeRoom3Img from './home-room-3.jpg'
-import homeRoom4Img from './home-room-4.jpg'
-import logoImg from './logo.gif'
-import oceanTales21Img from './ocean-tales-2-1.jpg'
-import oceanTales22Img from './ocean-tales-2-2.jpg'
-import setBookImg from './thumbnails/set-book.png'
-import setSpringImg from './thumbnails/set-spring.png'
-import setChillImg from './thumbnails/set-chill.png'
-import setNorthernImg from './thumbnails/set-northern.png'
-import setDeskImg from './thumbnails/set-desk.png'
-import setForestImg from './thumbnails/set-forest.png'
-import setOceanImg from './thumbnails/set-ocean.png'
-import setCafeImg from './thumbnails/set-cafe.png'
-import setVanImg from './thumbnails/set-van.png'
-import setSummerImg from './thumbnails/set-summer.png'
-import sceneChill1Img from './thumbnails/scene-chill-1.png'
-import sceneChill2Img from './thumbnails/scene-chill-2.png'
-import sceneNorthern1Img from './thumbnails/scene-northern-1.png'
-import sceneNorthern2Img from './thumbnails/scene-northern-2.png'
-import sceneDesk1Img from './thumbnails/scene-desk-1.jpg'
-import sceneDesk2Img from './thumbnails/scene-desk-2.jpg'
-import sceneDesk3Img from './thumbnails/scene-desk-3.jpg'
-import sceneForest1Img from './thumbnails/scene-forest-1.jpg'
-import sceneForest2Img from './thumbnails/scene-forest-2.jpg'
-import sceneOcean1Img from './thumbnails/scene-ocean-1.png'
-import sceneOcean2Img from './thumbnails/scene-ocean-2.png'
-import sceneCafe1Img from './thumbnails/scene-cafe-1.png'
-import sceneCafe2Img from './thumbnails/scene-cafe-2.png'
-import sceneVan1Img from './thumbnails/scene-van-1.png'
-import sceneVan2Img from './thumbnails/scene-van-2.png'
-import sceneSummer1Img from './thumbnails/scene-summer-1.png'
-import sceneSummer2Img from './thumbnails/scene-summer-2.png'
-import mosaicImg from './social-mosaic.svg'
-import sceneSpring1Img from './thumbnails/scene-spring-1.png'
-import sceneSpring2Img from './thumbnails/scene-spring-2.png'
-import sceneBook1Img from './thumbnails/scene-book-1.png'
-import sceneBook2Img from './thumbnails/scene-book-2.png'
+import { CDN_BASE } from '../../constants/cdn'
 
-export {
-  cafe1Img,
-  chill1Img,
-  chill2Img,
-  chill3Img,
-  chill4Img,
-  chill5Img,
-  chill6Img,
-  chill7Img,
-  foodStall1Img,
-  foodStall2Img,
-  foodStall3Img,
-  forestHouse1Img,
-  homeRoom1Img,
-  homeRoom2Img,
-  homeRoom3Img,
-  homeRoom4Img,
-  logoImg,
-  oceanTales21Img,
-  oceanTales22Img,
-  setChillImg,
-  setNorthernImg,
-  setDeskImg,
-  setForestImg,
-  setOceanImg,
-  setCafeImg,
-  setVanImg,
-  setBookImg,
-  setSpringImg,
-  setSummerImg,
-  sceneChill1Img,
-  sceneChill2Img,
-  sceneNorthern1Img,
-  sceneNorthern2Img,
-  sceneDesk1Img,
-  sceneDesk2Img,
-  sceneDesk3Img,
-  sceneForest1Img,
-  sceneForest2Img,
-  sceneOcean1Img,
-  sceneOcean2Img,
-  sceneCafe1Img,
-  sceneCafe2Img,
-  sceneVan1Img,
-  sceneVan2Img,
-  sceneSummer1Img,
-  sceneSummer2Img,
-  sceneBook1Img,
-  sceneBook2Img,
-  sceneSpring1Img,
-  sceneSpring2Img,
-  mosaicImg,
-}
+const BASE = `${CDN_BASE}/images`
+
+export const cafe1Img        = `${BASE}/cafe-1.jpg`
+export const chill1Img       = `${BASE}/chill-1.jpg`
+export const chill2Img       = `${BASE}/chill-2.jpg`
+export const chill3Img       = `${BASE}/chill-3.jpg`
+export const chill4Img       = `${BASE}/chill-4.jpg`
+export const chill5Img       = `${BASE}/chill-5.jpg`
+export const chill6Img       = `${BASE}/chill-6.jpg`
+export const chill7Img       = `${BASE}/chill-7.jpg`
+export const foodStall1Img   = `${BASE}/food-stall-1.jpg`
+export const foodStall2Img   = `${BASE}/food-stall-2.jpg`
+export const foodStall3Img   = `${BASE}/food-stall-3.jpg`
+export const forestHouse1Img = `${BASE}/forest-house-1.jpg`
+export const homeRoom1Img    = `${BASE}/home-room-1.jpg`
+export const homeRoom2Img    = `${BASE}/home-room-2.jpg`
+export const homeRoom3Img    = `${BASE}/home-room-3.jpg`
+export const homeRoom4Img    = `${BASE}/home-room-4.jpg`
+export const logoImg         = `${BASE}/logo.gif`
+export const oceanTales21Img = `${BASE}/ocean-tales-2-1.jpg`
+export const oceanTales22Img = `${BASE}/ocean-tales-2-2.jpg`
+export const mosaicImg       = `${BASE}/social-mosaic.svg`
+
+// Thumbnails — set
+export const setChillImg    = `${BASE}/thumbnails/set-chill.png`
+export const setNorthernImg = `${BASE}/thumbnails/set-northern.png`
+export const setDeskImg     = `${BASE}/thumbnails/set-desk.png`
+export const setForestImg   = `${BASE}/thumbnails/set-forest.png`
+export const setOceanImg    = `${BASE}/thumbnails/set-ocean.png`
+export const setCafeImg     = `${BASE}/thumbnails/set-cafe.png`
+export const setVanImg      = `${BASE}/thumbnails/set-van.png`
+export const setBookImg     = `${BASE}/thumbnails/set-book.png`
+export const setSpringImg   = `${BASE}/thumbnails/set-spring.png`
+export const setSummerImg   = `${BASE}/thumbnails/set-summer.png`
+
+// Thumbnails — scene
+export const sceneChill1Img    = `${BASE}/thumbnails/scene-chill-1.png`
+export const sceneChill2Img    = `${BASE}/thumbnails/scene-chill-2.png`
+export const sceneNorthern1Img = `${BASE}/thumbnails/scene-northern-1.png`
+export const sceneNorthern2Img = `${BASE}/thumbnails/scene-northern-2.png`
+export const sceneDesk1Img     = `${BASE}/thumbnails/scene-desk-1.jpg`
+export const sceneDesk2Img     = `${BASE}/thumbnails/scene-desk-2.jpg`
+export const sceneDesk3Img     = `${BASE}/thumbnails/scene-desk-3.jpg`
+export const sceneForest1Img   = `${BASE}/thumbnails/scene-forest-1.jpg`
+export const sceneForest2Img   = `${BASE}/thumbnails/scene-forest-2.jpg`
+export const sceneOcean1Img    = `${BASE}/thumbnails/scene-ocean-1.png`
+export const sceneOcean2Img    = `${BASE}/thumbnails/scene-ocean-2.png`
+export const sceneCafe1Img     = `${BASE}/thumbnails/scene-cafe-1.png`
+export const sceneCafe2Img     = `${BASE}/thumbnails/scene-cafe-2.png`
+export const sceneVan1Img      = `${BASE}/thumbnails/scene-van-1.png`
+export const sceneVan2Img      = `${BASE}/thumbnails/scene-van-2.png`
+export const sceneSummer1Img   = `${BASE}/thumbnails/scene-summer-1.png`
+export const sceneSummer2Img   = `${BASE}/thumbnails/scene-summer-2.png`
+export const sceneBook1Img     = `${BASE}/thumbnails/scene-book-1.png`
+export const sceneBook2Img     = `${BASE}/thumbnails/scene-book-2.png`
+export const sceneSpring1Img   = `${BASE}/thumbnails/scene-spring-1.png`
+export const sceneSpring2Img   = `${BASE}/thumbnails/scene-spring-2.png`

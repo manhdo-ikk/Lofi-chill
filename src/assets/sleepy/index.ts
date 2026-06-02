@@ -1,31 +1,18 @@
-import sleepy1 from './sleepy-1.mp3'
-import sleepy3 from './sleepy-3.mp3'
-import sleepy4 from './sleepy-4.mp3'
-import sleepy5 from './sleepy-5.mp3'
-import sleepy6 from './sleepy-6.mp3'
-import sleepy7 from './sleepy-7.mp3'
-import sleepy8 from './sleepy-8.mp3'
-import sleepy9 from './sleepy-9.mp3'
-import sleepy10 from './sleepy-10.mp3'
-import sleepy12 from './sleepy-12.mp3'
-import sleepy13 from './sleepy-13.mp3'
-import sleepy14 from './sleepy-14.mp3'
-import sleepy16 from './sleepy-16.mp3'
-import sleepy17 from './sleepy-17.mp3'
+import { CDN_BASE } from '../../constants/cdn'
 
-export {
-  sleepy1,
-  sleepy3,
-  sleepy4,
-  sleepy5,
-  sleepy6,
-  sleepy7,
-  sleepy8,
-  sleepy9,
-  sleepy10,
-  sleepy12,
-  sleepy13,
-  sleepy14,
-  sleepy16,
-  sleepy17,
-}
+const BASE = `${CDN_BASE}/sleepy`
+
+export const sleepy1  = `${BASE}/sleepy-1.mp3`
+export const sleepy3  = `${BASE}/sleepy-3.mp3`
+export const sleepy4  = `${BASE}/sleepy-4.mp3`
+export const sleepy5  = `${BASE}/sleepy-5.mp3`
+export const sleepy6  = `${BASE}/sleepy-6.mp3`
+export const sleepy7  = `${BASE}/sleepy-7.mp3`
+export const sleepy8  = `${BASE}/sleepy-8.mp3`
+export const sleepy9  = `${BASE}/sleepy-9.mp3`
+export const sleepy10 = `${BASE}/sleepy-10.mp3`
+export const sleepy12 = `${BASE}/sleepy-12.mp3`
+export const sleepy13 = `${BASE}/sleepy-13.mp3`
+export const sleepy14 = `${BASE}/sleepy-14.mp3`
+export const sleepy16 = `${BASE}/sleepy-16.mp3`
+export const sleepy17 = `${BASE}/sleepy-17.mp3`
