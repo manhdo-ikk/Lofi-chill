@@ -22,7 +22,9 @@ const NavbarSwitch = ({ checked, onChange, uncheckedIcon, checkedIcon, className
         height={30}
         width={62}
         activeBoxShadow="0px 0px 0px 0px transparent"
-        uncheckedIcon={<div className="flex justify-center items-center h-full">{uncheckedIcon}</div>}
+        uncheckedIcon={
+          <div className="flex justify-center items-center h-full">{uncheckedIcon}</div>
+        }
         checkedIcon={<div className="flex justify-center items-center h-full">{checkedIcon}</div>}
       />
     </div>

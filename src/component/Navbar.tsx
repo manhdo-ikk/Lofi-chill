@@ -1,5 +1,12 @@
 import { useContext } from 'react'
-import { fullscreenIcon, moonIcon, profileIcon, rainyIcon, sunIcon, sunnyIcon } from '../assets/icons'
+import {
+  fullscreenIcon,
+  moonIcon,
+  profileIcon,
+  rainyIcon,
+  sunIcon,
+  sunnyIcon,
+} from '../assets/icons'
 import { CDN_BASE } from '../constants/cdn'
 import { SETS_WITH_DAY_NIGHT, SETS_WITH_RAINY } from '../constants/sets'
 
@@ -23,9 +30,15 @@ const Navbar = () => {
 
   const handleFullScreen = () => {
     if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().then(() => setFullScreen(true)).catch(() => {})
+      document.documentElement
+        .requestFullscreen()
+        .then(() => setFullScreen(true))
+        .catch(() => {})
     } else if (document.exitFullscreen) {
-      document.exitFullscreen().then(() => setFullScreen(false)).catch(() => {})
+      document
+        .exitFullscreen()
+        .then(() => setFullScreen(false))
+        .catch(() => {})
     }
   }
 

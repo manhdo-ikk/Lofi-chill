@@ -1,7 +1,10 @@
 import type { Background, BackgroundCondition } from '../types'
 import { BACKGROUND_LINKS_LIST } from '../constants/links/videos'
 
-export const newBackground = (currentBg: Background, condition: BackgroundCondition): Background => {
+export const newBackground = (
+  currentBg: Background,
+  condition: BackgroundCondition
+): Background => {
   if (
     currentBg.set === condition.set &&
     currentBg.scene === condition.scene &&

@@ -12,11 +12,7 @@ import {
   PLAY_ALARM_LABEL,
   AUTO_RUN_LABEL,
 } from '../../constants/pomodoro'
-import {
-  SWITCH_ON_COLOR,
-  SWITCH_HANDLE_COLOR,
-  SWITCH_BG_OFF_COLOR,
-} from '../../constants/colors'
+import { SWITCH_ON_COLOR, SWITCH_HANDLE_COLOR, SWITCH_BG_OFF_COLOR } from '../../constants/colors'
 
 type Props = {
   handleSwitch: () => void
@@ -26,7 +22,13 @@ type Props = {
   setCurrentTime: React.Dispatch<React.SetStateAction<number>>
 }
 
-const SettingPomo = ({ handleSwitch, handleClose, defaultTime, setDefaultTime, setCurrentTime }: Props) => {
+const SettingPomo = ({
+  handleSwitch,
+  handleClose,
+  defaultTime,
+  setDefaultTime,
+  setCurrentTime,
+}: Props) => {
   const { alarmOn, setAlarmOn, autoRun, setAutoRun, setInitTimesAuto } = useContext(ThemeContext)
 
   return (
