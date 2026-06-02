@@ -40,6 +40,6 @@ jobs:
         run: |
           aws amplify start-deployment \
             --app-id ${{ secrets.AMPLIFY_APP_ID }} \
-            --branch-name main \
+            --branch-name staging \
             --source-url s3://${{ secrets.AWS_S3_BUCKET }}/releases/${{ github.sha }}/ \
             --source-url-type BUCKET_PREFIX
