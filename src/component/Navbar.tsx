@@ -35,8 +35,6 @@ const Navbar = () => {
         </div>
         <div>
           <button className="text-white font-bold text-lg mx-2">Home</button>
-          <button className="text-white font-bold text-lg mx-2">About</button>
-          <button className="text-white font-bold text-lg mx-2">Contact</button>
         </div>
         <div className="flex justify-center items-center">
           {SETS_WITH_DAY_NIGHT.includes(background.set ?? '') && (
