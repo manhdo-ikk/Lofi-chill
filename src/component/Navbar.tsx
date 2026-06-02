@@ -1,7 +1,9 @@
 import { useContext } from 'react'
 import { fullscreenIcon, moonIcon, profileIcon, rainyIcon, sunIcon, sunnyIcon } from '../assets/icons'
-import { logoImg } from '../assets/images'
+import { CDN_BASE } from '../constants/cdn'
 import { SETS_WITH_DAY_NIGHT, SETS_WITH_RAINY } from '../constants/sets'
+
+const logoImg = `${CDN_BASE}/images/logo.gif`
 import { ThemeContext } from '../context/'
 import { newBackground } from '../utils/newBackground'
 import NavbarSwitch from './NavbarSwitch'

@@ -1,124 +1,92 @@
 import type { SetItem } from '../types'
+import { CDN_BASE } from './cdn'
 
-// Sets that support toggling between day and night background
+const BASE = `${CDN_BASE}/images`
+const THUMB = `${BASE}/thumbnails`
+
 export const SETS_WITH_DAY_NIGHT = ['chill', 'cafe', 'book', 'spring']
-
-// Sets that support toggling the rainy weather overlay
 export const SETS_WITH_RAINY = ['chill', 'cafe']
-import {
-  setChillImg,
-  setSpringImg,
-  setBookImg,
-  setNorthernImg,
-  setDeskImg,
-  setForestImg,
-  setOceanImg,
-  setCafeImg,
-  setVanImg,
-  setSummerImg,
-  sceneChill1Img,
-  sceneChill2Img,
-  sceneNorthern1Img,
-  sceneNorthern2Img,
-  sceneDesk1Img,
-  sceneDesk2Img,
-  sceneDesk3Img,
-  sceneForest1Img,
-  sceneForest2Img,
-  sceneOcean1Img,
-  sceneOcean2Img,
-  sceneCafe1Img,
-  sceneCafe2Img,
-  sceneVan1Img,
-  sceneVan2Img,
-  sceneSummer1Img,
-  sceneSummer2Img,
-  sceneSpring1Img,
-  sceneSpring2Img,
-  sceneBook1Img,
-  sceneBook2Img,
-} from '../assets/images'
 
 export const SETS: SetItem[] = [
   {
     set: 'chill',
-    img: setChillImg,
+    img: `${THUMB}/set-chill.png`,
     scenes: [
-      { scene: 'scene1', img: sceneChill1Img },
-      { scene: 'scene2', img: sceneChill2Img },
+      { scene: 'scene1', img: `${THUMB}/scene-chill-1.png` },
+      { scene: 'scene2', img: `${THUMB}/scene-chill-2.png` },
     ],
   },
   {
     set: 'spring',
-    img: setSpringImg,
+    img: `${THUMB}/set-spring.png`,
     scenes: [
-      { scene: 'scene1', img: sceneSpring1Img },
-      { scene: 'scene2', img: sceneSpring2Img },
+      { scene: 'scene1', img: `${THUMB}/scene-spring-1.png` },
+      { scene: 'scene2', img: `${THUMB}/scene-spring-2.png` },
     ],
   },
   {
     set: 'northern',
-    img: setNorthernImg,
+    img: `${THUMB}/set-northern.png`,
     scenes: [
-      { scene: 'scene1', img: sceneNorthern1Img },
-      { scene: 'scene2', img: sceneNorthern2Img },
+      { scene: 'scene1', img: `${THUMB}/scene-northern-1.png` },
+      { scene: 'scene2', img: `${THUMB}/scene-northern-2.png` },
     ],
   },
   {
     set: 'book',
-    img: setBookImg,
+    img: `${THUMB}/set-book.png`,
     scenes: [
-      { scene: 'scene1', img: sceneBook1Img },
-      { scene: 'scene2', img: sceneBook2Img },
+      { scene: 'scene1', img: `${THUMB}/scene-book-1.png` },
+      { scene: 'scene2', img: `${THUMB}/scene-book-2.png` },
     ],
   },
   {
     set: 'desk',
-    img: setDeskImg,
+    img: `${THUMB}/set-desk.png`,
     scenes: [
-      { scene: 'scene1', img: sceneDesk1Img },
-      { scene: 'scene2', img: sceneDesk2Img },
-      { scene: 'scene3', img: sceneDesk3Img },
+      { scene: 'scene1', img: `${THUMB}/scene-desk-1.jpg` },
+      { scene: 'scene2', img: `${THUMB}/scene-desk-2.jpg` },
+      { scene: 'scene3', img: `${THUMB}/scene-desk-3.jpg` },
     ],
   },
   {
     set: 'forest',
-    img: setForestImg,
+    img: `${THUMB}/set-forest.png`,
     scenes: [
-      { scene: 'scene1', img: sceneForest1Img },
-      { scene: 'scene2', img: sceneForest2Img },
+      { scene: 'scene1', img: `${THUMB}/scene-forest-1.jpg` },
+      { scene: 'scene2', img: `${THUMB}/scene-forest-2.jpg` },
     ],
   },
   {
     set: 'ocean',
-    img: setOceanImg,
+    img: `${THUMB}/set-ocean.png`,
     scenes: [
-      { scene: 'scene1', img: sceneOcean1Img },
-      { scene: 'scene2', img: sceneOcean2Img },
+      { scene: 'scene1', img: `${THUMB}/scene-ocean-1.png` },
+      { scene: 'scene2', img: `${THUMB}/scene-ocean-2.png` },
     ],
   },
   {
     set: 'cafe',
-    img: setCafeImg,
+    img: `${THUMB}/set-cafe.png`,
     scenes: [
-      { scene: 'scene1', img: sceneCafe1Img },
-      { scene: 'scene2', img: sceneCafe2Img },
+      { scene: 'scene1', img: `${THUMB}/scene-cafe-1.png` },
+      { scene: 'scene2', img: `${THUMB}/scene-cafe-2.png` },
     ],
   },
   {
     set: 'van',
-    img: setVanImg,
+    img: `${THUMB}/set-van.png`,
     scenes: [
-      { scene: 'scene1', img: sceneVan1Img },
-      { scene: 'scene2', img: sceneVan2Img },
+      { scene: 'scene1', img: `${THUMB}/scene-van-1.png` },
+      { scene: 'scene2', img: `${THUMB}/scene-van-2.png` },
     ],
   },
   {
     set: 'summer',
-    img: setSummerImg,
+    img: `${THUMB}/set-summer.png`,
     scenes: [
-      { scene: 'scene1', img: sceneSummer1Img },
-      { scene: 'scene2', img: sceneSummer2Img },
+      { scene: 'scene1', img: `${THUMB}/scene-summer-1.png` },
+      { scene: 'scene2', img: `${THUMB}/scene-summer-2.png` },
     ],
   },
 ]

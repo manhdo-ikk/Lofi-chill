@@ -1,31 +1,19 @@
-import {
-  chill1,
-  chill2,
-  chill4,
-  chill5,
-  chill7,
-  chill8,
-  chill9,
-  chill10,
-  chill11,
-  chill12,
-  chill13,
-  chill14,
-  chill15,
-} from '../../assets/chill'
+import { CDN_BASE } from '../cdn'
+
+const BASE = `${CDN_BASE}/chill`
 
 export const CHILL_LINKS: string[] = [
-  chill1,
-  chill2,
-  chill4,
-  chill5,
-  chill7,
-  chill8,
-  chill9,
-  chill10,
-  chill11,
-  chill12,
-  chill13,
-  chill14,
-  chill15,
+  `${BASE}/chill-1.mp3`,
+  `${BASE}/chill-2.mp3`,
+  `${BASE}/chill-4.mp3`,
+  `${BASE}/chill-5.mp3`,
+  `${BASE}/chill-7.mp3`,
+  `${BASE}/chill-8.mp3`,
+  `${BASE}/chill-9.mp3`,
+  `${BASE}/chill-10.mp3`,
+  `${BASE}/chill-11.mp3`,
+  `${BASE}/chill-12.mp3`,
+  `${BASE}/chill-13.mp3`,
+  `${BASE}/chill-14.mp3`,
+  `${BASE}/chill-15.mp3`,
 ]

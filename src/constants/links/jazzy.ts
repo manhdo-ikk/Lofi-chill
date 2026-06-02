@@ -1,31 +1,19 @@
-import {
-  jazzy1,
-  jazzy2,
-  jazzy3,
-  jazzy4,
-  jazzy5,
-  jazzy6,
-  jazzy8,
-  jazzy10,
-  jazzy11,
-  jazzy12,
-  jazzy13,
-  jazzy14,
-  jazzy15,
-} from '../../assets/jazzy'
+import { CDN_BASE } from '../cdn'
+
+const BASE = `${CDN_BASE}/jazzy`
 
 export const JAZZY_LINKS: string[] = [
-  jazzy1,
-  jazzy2,
-  jazzy3,
-  jazzy4,
-  jazzy5,
-  jazzy6,
-  jazzy8,
-  jazzy10,
-  jazzy11,
-  jazzy12,
-  jazzy13,
-  jazzy14,
-  jazzy15,
+  `${BASE}/jazzy-1.mp3`,
+  `${BASE}/jazzy-2.mp3`,
+  `${BASE}/jazzy-3.mp3`,
+  `${BASE}/jazzy-4.mp3`,
+  `${BASE}/jazzy-5.mp3`,
+  `${BASE}/jazzy-6.mp3`,
+  `${BASE}/jazzy-8.mp3`,
+  `${BASE}/jazzy-10.mp3`,
+  `${BASE}/jazzy-11.mp3`,
+  `${BASE}/jazzy-12.mp3`,
+  `${BASE}/jazzy-13.mp3`,
+  `${BASE}/jazzy-14.mp3`,
+  `${BASE}/jazzy-15.mp3`,
 ]
