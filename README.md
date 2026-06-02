@@ -42,13 +42,7 @@ yarn start        # dev server at http://localhost:5173
 ```
 src/
 ├── assets/
-│   ├── icons/          # SVG icons (bundled)
-│   ├── chill/          # URL exports → CloudFront
-│   ├── jazzy/          # URL exports → CloudFront
-│   ├── sleepy/         # URL exports → CloudFront
-│   ├── noises/         # URL exports → CloudFront
-│   ├── videos/         # URL exports → CloudFront
-│   └── images/         # URL exports → CloudFront
+│   └── icons/          # SVG icons (bundled)
 │
 ├── component/
 │   ├── Audio.tsx        # Music player controls
