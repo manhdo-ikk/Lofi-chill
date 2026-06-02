@@ -1,10 +1,10 @@
 import { useContext } from 'react'
 import { fullscreenIcon, moonIcon, profileIcon, rainyIcon, sunIcon, sunnyIcon } from '../assets/icons'
 import { logoImg } from '../assets/images'
+import { SETS_WITH_DAY_NIGHT, SETS_WITH_RAINY } from '../constants/sets'
 import { ThemeContext } from '../context/'
 import { newBackground } from '../utils/newBackground'
 import NavbarSwitch from './NavbarSwitch'
-import { SETS_WITH_DAY_NIGHT, SETS_WITH_RAINY } from '../constants/sets'
 
 const Navbar = () => {
   const { background, setBackground, setFullScreen } = useContext(ThemeContext)
@@ -32,6 +32,11 @@ const Navbar = () => {
       <div className="flex justify-between mx-16 items-center">
         <div>
           <img src={logoImg} className="h-[100px]" alt="logo" />
+        </div>
+        <div>
+          <button className="text-white font-bold text-lg mx-2">Home</button>
+          <button className="text-white font-bold text-lg mx-2">About</button>
+          <button className="text-white font-bold text-lg mx-2">Contact</button>
         </div>
         <div className="flex justify-center items-center">
           {SETS_WITH_DAY_NIGHT.includes(background.set ?? '') && (
