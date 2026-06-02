@@ -1,0 +1,33 @@
+import {
+  sleepy1,
+  sleepy3,
+  sleepy4,
+  sleepy5,
+  sleepy6,
+  sleepy7,
+  sleepy8,
+  sleepy9,
+  sleepy10,
+  sleepy12,
+  sleepy13,
+  sleepy14,
+  sleepy16,
+  sleepy17,
+} from '../../assets/sleepy'
+
+export const SLEEPY_LINKS: string[] = [
+  sleepy1,
+  sleepy3,
+  sleepy4,
+  sleepy5,
+  sleepy6,
+  sleepy7,
+  sleepy8,
+  sleepy9,
+  sleepy10,
+  sleepy12,
+  sleepy13,
+  sleepy14,
+  sleepy16,
+  sleepy17,
+]

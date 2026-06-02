@@ -1,0 +1,31 @@
+import {
+  jazzy1,
+  jazzy2,
+  jazzy3,
+  jazzy4,
+  jazzy5,
+  jazzy6,
+  jazzy8,
+  jazzy10,
+  jazzy11,
+  jazzy12,
+  jazzy13,
+  jazzy14,
+  jazzy15,
+} from '../../assets/jazzy'
+
+export const JAZZY_LINKS: string[] = [
+  jazzy1,
+  jazzy2,
+  jazzy3,
+  jazzy4,
+  jazzy5,
+  jazzy6,
+  jazzy8,
+  jazzy10,
+  jazzy11,
+  jazzy12,
+  jazzy13,
+  jazzy14,
+  jazzy15,
+]

@@ -1,0 +1,31 @@
+import {
+  chill1,
+  chill2,
+  chill4,
+  chill5,
+  chill7,
+  chill8,
+  chill9,
+  chill10,
+  chill11,
+  chill12,
+  chill13,
+  chill14,
+  chill15,
+} from '../../assets/chill'
+
+export const CHILL_LINKS: string[] = [
+  chill1,
+  chill2,
+  chill4,
+  chill5,
+  chill7,
+  chill8,
+  chill9,
+  chill10,
+  chill11,
+  chill12,
+  chill13,
+  chill14,
+  chill15,
+]
