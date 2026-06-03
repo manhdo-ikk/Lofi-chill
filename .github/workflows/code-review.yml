@@ -1,0 +1,89 @@
+name: Claude Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Claude PR Review
+        uses: anthropics/claude-code-action@beta
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          direct_prompt: |
+            You are a code reviewer for a React + TypeScript + Vite + Tailwind CSS project.
+
+            First, read the file `CLAUDE.md` at the root of this repository to understand all project rules.
+
+            Then, review the changes introduced in this pull request against those rules.
+
+            Check for violations in these areas (from CLAUDE.md):
+
+            **TypeScript**
+            - `strict: true` must be respected — no implicit `any`
+            - Prefer `type` over `interface` for object shapes
+            - Shared types must be exported from `src/types.ts`
+            - Avoid `React.FC` — prefer inferred or explicit return types
+            - Non-null assertion `!` only when value is guaranteed non-null at runtime
+            - No `as any` — use proper type narrowing
+
+            **React**
+            - Functional components only — no class components
+            - One component per file; file name matches component name
+            - Props typed with a local `type Props = { ... }` above the component
+            - Sub-components extracted when file exceeds ~80 lines or is reused
+            - `useContext` called with the specific context — never passed as prop
+            - No `useEffect` for derived state — compute during render
+            - `useMemo`/`useCallback` only when profiling shows a real bottleneck
+
+            **Hooks**
+            - Custom hooks go in `src/hooks/`
+            - Every hook name starts with `use`
+            - Hooks must not be called conditionally
+
+            **State Management**
+            - Global state lives in `src/context/index.tsx`
+            - Local UI state stays in the component
+            - `localStorage` persistence only in context provider
+
+            **Styling**
+            - Tailwind CSS only — no inline `style` props, no CSS modules
+            - Conditional classes use template literals or `clsx`
+            - No magic color values — use Tailwind tokens or CSS variables
+
+            **Naming Conventions**
+            - Components: `PascalCase`
+            - Hooks: `camelCase` starting with `use`
+            - Constants: `SCREAMING_SNAKE_CASE`
+            - Types: `PascalCase`
+            - Event handlers: `handle` prefix (`handleClick`, `handleChange`)
+
+            **Imports**
+            Order: React/hooks → third-party → internal → types
+
+            **Comments**
+            - Only when the WHY is non-obvious
+            - No comments that restate what the code does
+            - No commented-out dead code
+            - ESLint disable comments require a reason on the same line
+
+            ---
+
+            Post your review as a PR comment with:
+            1. **Summary** — overall assessment (pass / needs changes)
+            2. **Violations** — each issue with file path, line number, rule broken, and suggested fix
+            3. **Praise** — note any parts that are well-written
+
+            If all changes follow the rules, post a short approval comment confirming compliance.
