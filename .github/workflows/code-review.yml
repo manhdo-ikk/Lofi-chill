@@ -89,7 +89,7 @@ jobs:
 
           url = (
               "https://generativelanguage.googleapis.com/v1beta"
-              f"/models/gemini-2.0-flash:generateContent?key={api_key}"
+              f"/models/gemini-1.5-flash:generateContent?key={api_key}"
           )
 
           req = urllib.request.Request(
@@ -118,7 +118,7 @@ jobs:
               f"{review}\n\n"
               "---\n"
               "_Rules sourced from [CLAUDE.md](./CLAUDE.md) · "
-              "Powered by [Gemini 2.0 Flash](https://ai.google.dev)_"
+              "Powered by [Gemini 1.5 Flash](https://ai.google.dev)_"
           )
 
           subprocess.run(
