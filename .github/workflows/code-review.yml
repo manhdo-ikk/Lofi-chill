@@ -1,4 +1,4 @@
-name: Claude Code Review
+name: Gemini Code Review
 
 on:
   pull_request:
@@ -17,73 +17,114 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Claude PR Review
-        uses: anthropics/claude-code-action@beta
-        with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          direct_prompt: |
-            You are a code reviewer for a React + TypeScript + Vite + Tailwind CSS project.
+      - name: Get PR diff
+        run: gh pr diff ${{ github.event.pull_request.number }} > pr.diff
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            First, read the file `CLAUDE.md` at the root of this repository to understand all project rules.
+      - name: Review with Gemini
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          python3 << 'PYEOF'
+          import os, json, urllib.request, urllib.error, subprocess, sys
 
-            Then, review the changes introduced in this pull request against those rules.
+          api_key = os.environ['GEMINI_API_KEY']
+          pr_number = os.environ['PR_NUMBER']
 
-            Check for violations in these areas (from CLAUDE.md):
+          rules = open('CLAUDE.md').read()
+          diff = open('pr.diff').read()
 
-            **TypeScript**
-            - `strict: true` must be respected — no implicit `any`
-            - Prefer `type` over `interface` for object shapes
-            - Shared types must be exported from `src/types.ts`
-            - Avoid `React.FC` — prefer inferred or explicit return types
-            - Non-null assertion `!` only when value is guaranteed non-null at runtime
-            - No `as any` — use proper type narrowing
+          if not diff.strip():
+              print("No diff found, skipping review.")
+              sys.exit(0)
 
-            **React**
-            - Functional components only — no class components
-            - One component per file; file name matches component name
-            - Props typed with a local `type Props = { ... }` above the component
-            - Sub-components extracted when file exceeds ~80 lines or is reused
-            - `useContext` called with the specific context — never passed as prop
-            - No `useEffect` for derived state — compute during render
-            - `useMemo`/`useCallback` only when profiling shows a real bottleneck
+          # Truncate diff if too large to stay within Gemini context limits
+          MAX_DIFF_CHARS = 30000
+          truncated = len(diff) > MAX_DIFF_CHARS
+          if truncated:
+              diff = diff[:MAX_DIFF_CHARS] + "\n\n[... diff truncated due to size ...]"
 
-            **Hooks**
-            - Custom hooks go in `src/hooks/`
-            - Every hook name starts with `use`
-            - Hooks must not be called conditionally
+          prompt = f"""You are a strict code reviewer for a React + TypeScript + Vite + Tailwind CSS project.
 
-            **State Management**
-            - Global state lives in `src/context/index.tsx`
-            - Local UI state stays in the component
-            - `localStorage` persistence only in context provider
+          The project's coding rules are defined in CLAUDE.md:
 
-            **Styling**
-            - Tailwind CSS only — no inline `style` props, no CSS modules
-            - Conditional classes use template literals or `clsx`
-            - No magic color values — use Tailwind tokens or CSS variables
+          {rules}
 
-            **Naming Conventions**
-            - Components: `PascalCase`
-            - Hooks: `camelCase` starting with `use`
-            - Constants: `SCREAMING_SNAKE_CASE`
-            - Types: `PascalCase`
-            - Event handlers: `handle` prefix (`handleClick`, `handleChange`)
+          The pull request diff to review:
 
-            **Imports**
-            Order: React/hooks → third-party → internal → types
+          ```diff
+          {diff}
+          ```
 
-            **Comments**
-            - Only when the WHY is non-obvious
-            - No comments that restate what the code does
-            - No commented-out dead code
-            - ESLint disable comments require a reason on the same line
+          Review ONLY the changed lines against the rules above.
+          Structure your response in markdown:
 
-            ---
+          ## Overall
+          One line verdict: **Pass ✅** or **Needs Changes ⚠️**
 
-            Post your review as a PR comment with:
-            1. **Summary** — overall assessment (pass / needs changes)
-            2. **Violations** — each issue with file path, line number, rule broken, and suggested fix
-            3. **Praise** — note any parts that are well-written
+          ## Violations
+          For each violation:
+          - **File**: `path/to/file.tsx` line X
+          - **Rule**: which rule is broken
+          - **Fix**: what to change
 
-            If all changes follow the rules, post a short approval comment confirming compliance.
+          If no violations found, write: _No violations found._
+
+          ## Suggestions _(optional)_
+          Non-blocking improvements, if any.
+
+          ## Good Practices
+          What was done well.
+
+          Be concise and actionable. Do not repeat rules that were followed correctly.
+          """
+
+          payload = {
+              "contents": [{"parts": [{"text": prompt}]}],
+              "generationConfig": {"temperature": 0.1, "maxOutputTokens": 2048}
+          }
+
+          url = (
+              "https://generativelanguage.googleapis.com/v1beta"
+              f"/models/gemini-2.0-flash:generateContent?key={api_key}"
+          )
+
+          req = urllib.request.Request(
+              url,
+              data=json.dumps(payload).encode(),
+              headers={"Content-Type": "application/json"},
+              method="POST",
+          )
+
+          try:
+              with urllib.request.urlopen(req) as resp:
+                  result = json.loads(resp.read())
+                  review = result["candidates"][0]["content"]["parts"][0]["text"]
+          except urllib.error.HTTPError as e:
+              body = e.read().decode()
+              print(f"Gemini API error {e.code}: {body}", file=sys.stderr)
+              sys.exit(1)
+
+          truncation_note = (
+              "\n> ⚠️ Diff was truncated to 30,000 chars due to size.\n" if truncated else ""
+          )
+
+          comment = (
+              "## 🤖 Gemini Code Review\n\n"
+              f"{truncation_note}"
+              f"{review}\n\n"
+              "---\n"
+              "_Rules sourced from [CLAUDE.md](./CLAUDE.md) · "
+              "Powered by [Gemini 2.0 Flash](https://ai.google.dev)_"
+          )
+
+          subprocess.run(
+              ["gh", "pr", "comment", pr_number, "--body", comment],
+              check=True,
+          )
+
+          print("Review posted successfully.")
+          PYEOF
