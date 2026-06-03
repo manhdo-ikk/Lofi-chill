@@ -1,0 +1,89 @@
+name: PR Preview Deploy
+
+on:
+  pull_request:
+    branches: [main]
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        run: yarn build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Deploy to S3
+        run: aws s3 sync dist/ s3://${{ secrets.AWS_S3_BUCKET }}/releases/${{ github.sha }}/ --delete
+
+      - name: Trigger Amplify staging deployment
+        run: |
+          aws amplify start-deployment \
+            --app-id ${{ secrets.AMPLIFY_APP_ID }} \
+            --branch-name staging \
+            --source-url s3://${{ secrets.AWS_S3_BUCKET }}/releases/${{ github.sha }}/ \
+            --source-url-type BUCKET_PREFIX
+
+      - name: Comment PR with preview link
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const appId = '${{ secrets.AMPLIFY_APP_ID }}';
+            const previewUrl = `https://staging.${appId}.amplifyapp.com`;
+            const sha = '${{ github.sha }}'.slice(0, 7);
+            const body = [
+              '## Preview Deployment',
+              '',
+              `| | |`,
+              `|---|---|`,
+              `| **URL** | [${previewUrl}](${previewUrl}) |`,
+              `| **Commit** | \`${sha}\` |`,
+              `| **Status** | Deploying... (check Amplify console for status) |`,
+            ].join('\n');
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const existing = comments.find(c => c.body.includes('## Preview Deployment'));
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
