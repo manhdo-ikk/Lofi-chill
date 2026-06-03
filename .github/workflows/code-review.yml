@@ -22,23 +22,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: List available Gemini models (debug)
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: |
-          python3 << 'PYEOF'
-          import os, json, urllib.request
-
-          api_key = os.environ['GEMINI_API_KEY']
-          url = f"https://generativelanguage.googleapis.com/v1beta/models?key={api_key}"
-          with urllib.request.urlopen(url) as resp:
-              data = json.loads(resp.read())
-          print("=== Models supporting generateContent ===")
-          for m in data.get("models", []):
-              if "generateContent" in m.get("supportedGenerationMethods", []):
-                  print(m["name"])
-          PYEOF
-
       - name: Review with Gemini
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -105,8 +88,8 @@ jobs:
           }
 
           url = (
-              "https://generativelanguage.googleapis.com/v1"
-              f"/models/gemini-1.5-flash:generateContent?key={api_key}"
+              "https://generativelanguage.googleapis.com/v1beta"
+              f"/models/gemini-2.0-flash-lite:generateContent?key={api_key}"
           )
 
           req = urllib.request.Request(
@@ -135,7 +118,7 @@ jobs:
               f"{review}\n\n"
               "---\n"
               "_Rules sourced from [CLAUDE.md](./CLAUDE.md) · "
-              "Powered by [Gemini 1.5 Flash](https://ai.google.dev)_"
+              "Powered by [Gemini 2.0 Flash Lite](https://ai.google.dev)_"
           )
 
           subprocess.run(
