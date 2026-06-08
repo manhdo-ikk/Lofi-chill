@@ -12,7 +12,7 @@ A lofi music web app with ambient sounds, animated backgrounds, and a Pomodoro t
 
 ## Features
 
-- 3 music moods: Chill, Jazzy, Sleepy (41 tracks total)
+- 3 music moods: Chill, Jazzy, Sleepy
 - 16 ambient noise layers (rain, fire, birds, keyboard, etc.)
 - 42 animated background scenes with day / night / rainy variants
 - Pomodoro timer with customizable sessions
