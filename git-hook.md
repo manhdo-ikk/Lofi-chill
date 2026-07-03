@@ -133,7 +133,7 @@ pre-push:
 
  [package.json](package.json) の `yarn format:check` を実行し、フォーマット崩れがあれば push を中止します。
 
-②コミットメッセージを `feat: 〇〇` 形式に強制したい場合は、こう追加できます。
+②（ブランチ名）コミットメッセージを `feat: 〇〇` 形式に強制したい場合は、こう追加できます。
 
 ```yaml
 commit-msg:
