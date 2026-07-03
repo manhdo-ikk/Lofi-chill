@@ -11,6 +11,7 @@
     "react-switch": "^6.0.0"
   },
   "scripts": {
+    "prepare": "lefthook install",
     "start": "vite",
     "build": "vite build",
     "preview": "vite preview",
@@ -35,6 +36,7 @@
     "eslint-plugin-react-refresh": "^0.5.2",
     "gh-pages": "^4.0.0",
     "globals": "^17.6.0",
+    "lefthook": "^2.1.9",
     "postcss": "^8.4.12",
     "prettier": "^3.8.3",
     "tailwindcss": "^3.0.24",

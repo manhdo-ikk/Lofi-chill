@@ -1,0 +1,19 @@
+pre-commit:
+  commands:
+    demo:
+      run: 'echo "🔔 [pre-commit] これからコミットを行います!"'
+
+commit-msg:
+  commands:
+    demo:
+      run: 'echo "📝 [commit-msg] コミットメッセージ: $(cat {1})"'
+
+post-commit:
+  commands:
+    demo:
+      run: 'echo "🎉 [post-commit] コミットが完了しました!"'
+
+pre-push:
+  commands:
+    demo:
+      run: 'echo "🚀 [pre-push] これから push します!"'
