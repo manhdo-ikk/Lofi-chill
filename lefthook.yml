@@ -1,0 +1,23 @@
+pre-commit:
+  commands:
+    demo:
+      run: 'echo "これからコミットを行います!"'
+
+commit-msg:
+  commands:
+    demo:
+      run: 'echo "コミットメッセージ!"'
+    # block:
+    #   run: bash -c 'echo "チェックNG!コミットを中止します"; exit 1'
+
+post-commit:
+  commands:
+    demo:
+      run: 'echo "コミットが完了しました!"'
+
+pre-push:
+  commands:
+    demo:
+      run: 'echo "これからpushします!"'
+    # format:
+    #   run: yarn format:check
