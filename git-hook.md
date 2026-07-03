@@ -6,7 +6,7 @@ Git Hooks とは、**Git の操作(コミットや push など)のタイミン�
 
 ポイントは 2 つだけです。
 
-- Git に**標準で付いている機能**(インストール不要)
+- Git に**標準で付いている機能**
 - **自分のパソコンの中(ローカル)で動く**(サーバーには影響しない)
 
 イメージ:
@@ -21,24 +21,9 @@ git commit を実行
 コミットが完了する
 ```
 
-## 2. どういう仕組みで動くの?
+>  Husky・Lefthook・[pre-commit](https://pre-commit.com/) は、hook のスクリプトを設定ファイルで簡単に書けるようにしてくれるツールです。
 
-リポジトリを作ると、中に `.git/hooks/` というフォルダが自動でできています。
-
-```sh
-ls .git/hooks/
-# pre-commit.sample  commit-msg.sample  pre-push.sample  ...
-```
-
-最初から `.sample` というサンプルファイルが入っています。仕組みはとてもシンプルです。
-
-1. `.sample` を外した名前のファイルを置く(例:`pre-commit`)
-2. 実行権限を付ける(`chmod +x`)
-3. あとは Git が**そのタイミングで勝手に実行してくれる**
-
-たったこれだけです。
-
-## 3. フックの種類
+## 2. フックの種類
 
 フックはたくさんありますが、名前のルールは簡単です。
 
@@ -55,7 +40,7 @@ ls .git/hooks/
 | `pre-push` | push の**直前** |
 | `post-merge` | マージが**終わった後** |
 
-## 4. 実際に書いてみよう(メッセージを表示するだけ)
+## 3. 実際に書いてみよう(メッセージを表示するだけ)
 
 「コミットしたらメッセージを表示する」フックを、このプロジェクトの [lefthook.yml](lefthook.yml) にそのまま用意しています。中身はどれも 1 行の `echo` だけです。
 
@@ -63,15 +48,21 @@ ls .git/hooks/
 pre-commit:
   commands:
     demo:
-      run: echo "🔔 [pre-commit] これからコミットを行います!"
+      run: 'echo "🔔 [pre-commit] これからコミットを行います!"'
 ```
+
+構造はシンプルで 4 段だけです。
+
+- `pre-commit`:どの**フック**で動かすか(2. の表にある名前)
+- `commands`:このフックで実行するコマンド一覧(複数書ける)
+- `demo`:コマンドの**名前**(自由に付けられる。例:`lint`、`format` など)
+- `run`:実際に**実行するコマンド**(シェルコマンドをそのまま書く)
 
 `commit-msg` / `post-commit` / `pre-push` も同じ形で書いてあります。
 
 試してみましょう。
 
 ```sh
-yarn install        # devDependencies の lefthook がインストールされ、prepare スクリプトでフックが有効になる
 git commit -m "test"
 ```
 
@@ -83,9 +74,7 @@ git commit -m "test"
 🎉 [post-commit] コミットが完了しました!
 ```
 
-`.git/hooks/` に直接スクリプトを置く代わりに、`lefthook.yml` に書いておけば lefthook が自動でフックを登録・実行してくれます(実行権限の付与も不要)。
-
-## 5. 何に使えるの?(実際の応用)
+## 4. 何に使えるの?(実際の応用)
 
 「メッセージを表示するだけ」では意味がありませんが、ここに**チェック処理**を書くと、とても便利になります。
 
@@ -98,5 +87,27 @@ git commit -m "test"
 - **pre-push**:テストを実行 → 失敗したら push させない
 
 つまり、**「うっかりミスをリモートに上げる前に、ローカルで自動的に止めてくれる門番」**として使うのが一番の応用です。
+
+このプロジェクト([package.json](package.json))には現状テスト用のスクリプトはなく、代わりに `yarn lint` / `yarn format:check` があります。そのため実際に組むなら、例えばこんな形になります。
+
+```yaml
+pre-commit:
+  commands:
+    lint:
+      run: yarn lint
+    format:
+      run: yarn format:check
+
+commit-msg:
+  commands:
+    check-format:
+      run: |
+        grep -qE '^(feat|fix|docs|style|refactor|test|chore)(\(.+\))?: .+' {1} || {
+          echo "❌ コミットメッセージは 'feat: 〇〇' のような形式にしてください"
+          exit 1
+        }
+```
+
+もしテストを追加する場合は `pre-push` に `run: yarn test` のような形で足せば OK です。
 
 なお、実務のチーム開発では Husky や Lefthook というツールでフックを管理することが多いですが、中身は今日説明した仕組みそのものです。まずはこのデモで「コミットしたらスクリプトが動く」感覚をつかんでみてください。
