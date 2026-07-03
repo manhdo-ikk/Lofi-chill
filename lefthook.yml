@@ -7,8 +7,8 @@ commit-msg:
   commands:
     demo:
       run: 'echo "コミットメッセージ!"'
-    block:
-      run: bash -c 'echo "チェックNG!コミットを中止します"; exit 1'
+    # block:
+    #   run: bash -c 'echo "チェックNG!コミットを中止します"; exit 1'
 
 post-commit:
   commands:
