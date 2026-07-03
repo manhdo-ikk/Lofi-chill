@@ -2,8 +2,6 @@ pre-commit:
   commands:
     demo:
       run: 'echo "これからコミットを行います!"'
-    # format:
-    #   run: yarn format:check
 
 commit-msg:
   commands:
@@ -21,3 +19,5 @@ pre-push:
   commands:
     demo:
       run: 'echo "これからpushします!"'
+    # format:
+    #   run: yarn format:check
