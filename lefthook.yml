@@ -16,4 +16,4 @@ post-commit:
 pre-push:
   commands:
     demo:
-      run: 'echo "これから push します!"'
+      run: 'echo "これからpushします!"'
