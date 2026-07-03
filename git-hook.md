@@ -78,14 +78,14 @@ git commit -m "test"
 
 3. で見た `echo` は「表示するだけ」でしたが、フックの本当の力は**操作を止められる**ことにあります。
 
-覚えることは 1 つだけです。
 
-- コマンドが `exit 0`(正常終了)→ そのまま次に進む
-- コマンドが `exit 1`(エラー終了)→ **そこで中止される**
+- コマンドが正常終了→ そのまま次に進む
+- コマンドがエラー終了→ **そこで中止される**
+
 
 `pre-〇〇` 系のフック(`pre-commit` / `pre-push` など)はこの仕組みを使って、「NG なら実行させない」という**門番**になれます。
 
-### exit 1 で止まる例
+### エラーで止まる例
 
 試しに、必ず失敗する(exit 1 を返す)コマンドを `pre-commit` に足してみます。
 
@@ -106,14 +106,13 @@ git commit -m "test"
 
 ```
 ❌ チェックNG!コミットを中止します
-husky - commit-msg hook exited with code 1 (error)
 ```
 
-`exit 1` を返したコマンドがあると、**コミット自体が作られずに終わる**のがポイントです(`git log` にも残りません)。
+`exit 1` を返したコマンドがあると、**コミット自体が作られずに終わる**のがポイントです
 
 ### 実際のプロジェクトでの使い方
 
-実際には「必ず失敗する」コマンドの代わりに、**NG のときだけ exit 1 を返すチェック**を書きます。**うっかりミスをリモートに上げる前に、ローカルで止めてくれる門番**として使うのが一番の応用です。
+
 
 よくある組み合わせの例:
 
@@ -123,7 +122,7 @@ husky - commit-msg hook exited with code 1 (error)
 | `commit-msg` | メッセージが `feat: 〇〇` 形式か → 形式違反なら中止 |
 | `pre-push` | テスト実行 → 失敗なら push 中止 |
 
-このプロジェクトの [lefthook.yml](lefthook.yml) は、上の表とは配置が少し違っていて、実際に「門番」として動いているのは `pre-push` の `format` だけです。
+①このプロジェクトの [lefthook.yml](lefthook.yml) は、上の表とは配置が少し違っていて、実際に「門番」として動いているのは `pre-push` の `format` だけです。
 
 ```yaml
 pre-push:
@@ -132,9 +131,9 @@ pre-push:
       run: yarn format:check
 ```
 
-ポイント: [package.json](package.json) の `yarn format:check` を実行し、フォーマット崩れがあれば push を中止します。
+ [package.json](package.json) の `yarn format:check` を実行し、フォーマット崩れがあれば push を中止します。
 
-表にある `commit-msg` のチェックはまだ入っていません。例えば、コミットメッセージを `feat: 〇〇` 形式に強制したい場合は、こう追加できます。
+②（Cohac Development プロジェクト）コミットメッセージを `feat: 〇〇` 形式に強制したい場合は、こう追加できます。
 
 ```yaml
 commit-msg:
