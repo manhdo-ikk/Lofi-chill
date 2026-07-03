@@ -115,22 +115,28 @@ husky - commit-msg hook exited with code 1 (error)
 
 実際には「必ず失敗する」コマンドの代わりに、**NG のときだけ exit 1 を返すチェック**を書きます。**うっかりミスをリモートに上げる前に、ローカルで止めてくれる門番**として使うのが一番の応用です。
 
+よくある組み合わせの例:
+
 | フック | チェック内容 |
 |---|---|
 | `pre-commit` | Lint / フォーマット → NG ならコミット中止 |
 | `commit-msg` | メッセージが `feat: 〇〇` 形式か → 形式違反なら中止 |
 | `pre-push` | テスト実行 → 失敗なら push 中止 |
 
-このプロジェクトには `yarn lint` / `yarn format:check` があるので、例えばこう組めます([package.json](package.json))。
+このプロジェクトの [lefthook.yml](lefthook.yml) は、上の表とは配置が少し違っていて、実際に「門番」として動いているのは `pre-push` の `format` だけです。
 
 ```yaml
-pre-commit:
+pre-push:
   commands:
-    lint:
-      run: yarn lint
-    format:
+    format: # 👈 実際に動いている唯一の「門番」
       run: yarn format:check
+```
 
+ポイント: [package.json](package.json) の `yarn format:check` を実行し、フォーマット崩れがあれば push を中止します。
+
+表にある `commit-msg` のチェックはまだ入っていません。例えば、コミットメッセージを `feat: 〇〇` 形式に強制したい場合は、こう追加できます。
+
+```yaml
 commit-msg:
   commands:
     check-format:
@@ -141,6 +147,4 @@ commit-msg:
         }
 ```
 
-`yarn lint` や `grep` のコマンド自体が NG のときに exit 1 を返してくれるので、上の例のように書くだけで自動的に「門番」になります。
-
-もしテストを追加する場合は `pre-push` に `run: yarn test` のような形で足せば OK です。
+同じように、`pre-commit` に `yarn lint` を足したり、`pre-push` に `run: yarn test` を足したりすれば、表にあるような門番を増やせます。

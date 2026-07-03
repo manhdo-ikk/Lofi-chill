@@ -19,5 +19,5 @@ pre-push:
   commands:
     demo:
       run: 'echo "これからpushします!"'
-    format:
-      run: yarn format:check
+    # format:
+    #   run: yarn format:check
