@@ -69,9 +69,9 @@ git commit -m "test"
 結果:
 
 ```
-🔔 [pre-commit] これからコミットを行います!
-📝 [commit-msg] コミットメッセージ: test
-🎉 [post-commit] コミットが完了しました!
+ [pre-commit] これからコミットを行います!
+ [commit-msg] コミットメッセージ: test
+ [post-commit] コミットが完了しました!
 ```
 
 ## 4. 何に使えるの?(実際の応用)
