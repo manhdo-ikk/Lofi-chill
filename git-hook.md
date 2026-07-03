@@ -48,7 +48,7 @@ git commit を実行
 pre-commit:
   commands:
     demo:
-      run: 'echo "🔔 [pre-commit] これからコミットを行います!"'
+      run: 'echo "🔔これからコミットを行います!"'
 ```
 
 構造はシンプルで 4 段だけです。
